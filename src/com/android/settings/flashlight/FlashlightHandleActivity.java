@@ -87,7 +87,10 @@ public class FlashlightHandleActivity extends Activity implements Indexable {
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
-                    keys.add(DATA_KEY);
+                    if (!FlashlightSlice.isFlashlightAvailable(context)) {
+                        Log.i(TAG, "Flashlight is unavailable");
+                        keys.add(DATA_KEY);
+                    }
                     return keys;
                 }
             };

@@ -21,7 +21,6 @@ import android.content.Context;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
 import android.hardware.input.KeyboardLayout;
-import android.hardware.input.KeyboardLayoutSelectionResult;
 import android.os.Bundle;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodSubtype;
@@ -202,13 +201,13 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
 
     private String getSelectedLayoutLabel() {
         String label = mContext.getString(R.string.keyboard_default_layout);
-        KeyboardLayoutSelectionResult result = NewKeyboardSettingsUtils.getKeyboardLayout(
+        String layout = NewKeyboardSettingsUtils.getKeyboardLayout(
                 mIm, mUserId, mInputDeviceIdentifier, mInputMethodInfo, mInputMethodSubtype);
         KeyboardLayout[] keyboardLayouts = NewKeyboardSettingsUtils.getKeyboardLayouts(
                 mIm, mUserId, mInputDeviceIdentifier, mInputMethodInfo, mInputMethodSubtype);
-        if (result.getLayoutDescriptor() != null) {
+        if (layout != null) {
             for (KeyboardLayout keyboardLayout : keyboardLayouts) {
-                if (keyboardLayout.getDescriptor().equals(result.getLayoutDescriptor())) {
+                if (keyboardLayout.getDescriptor().equals(layout)) {
                     label = keyboardLayout.getLabel();
                     break;
                 }

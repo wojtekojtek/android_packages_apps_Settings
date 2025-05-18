@@ -23,9 +23,10 @@
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="my_device_info_header"
-        android:order="-1"
+        android:order="0"
         android:layout="@layout/settings_entity_header"
-        android:selectable="false"/>
+        android:selectable="false"
+        settings:isPreferenceVisible="false"/>
 
     <PreferenceCategory
         android:key="basic_info_category"
@@ -51,11 +52,12 @@
             settings:controller="com.android.settings.deviceinfo.BrandedAccountPreferenceController"/>
 
         <!-- Phone number -->
-        <com.android.settings.deviceinfo.PhoneNumberSummaryPreference
+        <Preference
             android:key="phone_number"
             android:order="3"
             android:title="@string/status_number"
             android:summary="@string/summary_placeholder"
+            android:selectable="false"
             settings:isPreferenceVisible="@bool/config_show_sim_info"
             settings:controller="com.android.settings.deviceinfo.PhoneNumberPreferenceController"
             settings:enableCopying="true"/>
@@ -117,7 +119,6 @@
             android:key="eid_info"
             android:order="31"
             android:title="@string/status_eid"
-            android:summary="@string/device_info_protected_single_press"
             android:positiveButtonText="@string/dlg_ok"
             android:dialogLayout="@layout/dialog_eid_status"
             settings:isPreferenceVisible="@bool/config_show_sim_info"
@@ -125,7 +126,7 @@
             settings:controller="com.android.settings.deviceinfo.simstatus.SimEidPreferenceController"/>
 
         <!-- IMEI -->
-        <com.android.settings.deviceinfo.PhoneNumberSummaryPreference
+        <Preference
             android:key="imei_info"
             android:order="32"
             android:title="@string/status_imei"
@@ -144,14 +145,14 @@
             android:fragment="com.android.settings.deviceinfo.firmwareversion.FirmwareVersionSettings"
             settings:controller="com.android.settings.deviceinfo.firmwareversion.FirmwareVersionPreferenceController"/>
 
-        <!-- Lineage version -->
+        <!-- Battery information -->
         <Preference
-            android:key="lineage_os_version"
+            android:key="battery_info"
             android:order="43"
-            android:title="@*lineageos.platform:string/lineage_version"
-            android:summary="@string/summary_placeholder"
-            settings:enableCopying="true"
-            settings:controller="com.android.settings.deviceinfo.firmwareversion.LineageVersionDetailPreferenceController"/>
+            android:title="@string/battery_info"
+            android:fragment="com.android.settings.deviceinfo.batteryinfo.BatteryInfoFragment"
+            settings:keywords="@string/keywords_battery_info"
+            settings:controller="com.android.settings.deviceinfo.batteryinfo.BatteryInfoPreferenceController"/>
     </PreferenceCategory>
 
     <PreferenceCategory

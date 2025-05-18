@@ -74,7 +74,6 @@ android_library {
 
         // Android internal dependencies
         "BiometricsSharedLib",
-        "SystemUISharedLib",
         "SystemUIUnfoldLib",
         "WifiTrackerLib",
         "android.hardware.dumpstate-V1-java",
@@ -91,7 +90,6 @@ android_library {
         "MediaDrmSettingsFlagsLib",
         "Settings-change-ids",
         "SettingsLib",
-        "SettingsLibDataStore",
         "SettingsLibActivityEmbedding",
         "aconfig_settings_flags_lib",
         "accessibility_settings_flags_lib",
@@ -112,11 +110,6 @@ android_library {
         "androidx.test.rules",
         "telephony_flags_core_java_lib",
         "setupdesign-lottie-loading-layout",
-
-        // Lineage dependencies
-        "org.lineageos.platform.internal",
-        "LineagePreferenceLib",
-        "vendor.lineage.fastcharge-V1.0-java",
     ],
 
     plugins: ["androidx.room_room-compiler-plugin"],

@@ -18,12 +18,10 @@ package com.android.settings.datausage.lib
 
 import android.app.usage.NetworkStats
 import android.content.Context
-import android.content.pm.UserProperties
 import android.net.NetworkPolicyManager
 import android.net.NetworkTemplate
 import android.os.Process
 import android.os.UserHandle
-import android.os.UserManager
 import android.util.SparseArray
 import android.util.SparseBooleanArray
 import androidx.annotation.VisibleForTesting
@@ -52,11 +50,7 @@ class AppDataUsageRepository(
         val items = ArrayList<AppItem>()
         val knownItems = SparseArray<AppItem>()
         val profiles = context.userManager.userProfiles
-        val userManager : UserManager = context.getSystemService(Context.USER_SERVICE) as UserManager
-        val userIdToIsHiddenMap = profiles.associate { profile ->
-            profile.identifier to shouldSkipProfile(userManager, profile)
-        }
-        bindStats(buckets, userIdToIsHiddenMap, knownItems, items)
+        bindStats(buckets, profiles, knownItems, items)
         val restrictedUids = context.getSystemService(NetworkPolicyManager::class.java)!!
             .getUidsWithPolicy(NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND)
         for (uid in restrictedUids) {
@@ -104,7 +98,7 @@ class AppDataUsageRepository(
 
     private fun bindStats(
         buckets: List<Bucket>,
-        userIdToIsHiddenMap: Map<Int, Boolean>,
+        profiles: List<UserHandle>,
         knownItems: SparseArray<AppItem>,
         items: ArrayList<AppItem>,
     ) {
@@ -114,11 +108,8 @@ class AppDataUsageRepository(
             val collapseKey: Int
             val category: Int
             val userId = UserHandle.getUserId(uid)
-            if(userIdToIsHiddenMap[userId] == true) {
-                continue
-            }
             if (UserHandle.isApp(uid) || Process.isSdkSandboxUid(uid)) {
-                if (userIdToIsHiddenMap.keys.contains(userId)) {
+                if (profiles.contains(UserHandle(userId))) {
                     if (userId != currentUserId) {
                         // Add to a managed user item.
                         accumulate(
@@ -160,16 +151,6 @@ class AppDataUsageRepository(
                 items = items,
             )
         }
-    }
-
-    private fun shouldSkipProfile(userManager : UserManager, userHandle: UserHandle): Boolean {
-        if (android.os.Flags.allowPrivateProfile()
-                && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()) {
-            return (userManager.isQuietModeEnabled(userHandle)
-                    && userManager.getUserProperties(userHandle).showInQuietMode
-                    == UserProperties.SHOW_IN_QUIET_MODE_HIDDEN)
-        }
-        return false
     }
 
     /**

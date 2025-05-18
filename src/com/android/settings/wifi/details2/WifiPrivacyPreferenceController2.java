@@ -26,7 +26,6 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.wifi.flags.Flags;
 import com.android.wifitrackerlib.WifiEntry;
 
 /**
@@ -51,7 +50,7 @@ public class WifiPrivacyPreferenceController2 extends BasePreferenceController i
 
     @Override
     public int getAvailabilityStatus() {
-        return (!Flags.androidVWifiApi() && mWifiManager.isConnectedMacRandomizationSupported())
+        return mWifiManager.isConnectedMacRandomizationSupported()
                 ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 

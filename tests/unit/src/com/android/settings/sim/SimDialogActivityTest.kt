@@ -45,11 +45,10 @@ class SimDialogActivityTest {
     @Mock
     private lateinit var userManager: UserManager
 
-    private lateinit var activity: SimDialogActivity
+    private var activity = MockSimDialogActivity()
 
     @Before
     fun setUp() {
-        activity = MockSimDialogActivity()
         whenever(context.userManager).thenReturn(userManager)
         whenever(userManager.isGuestUser).thenReturn(false)
         whenever(userManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS))

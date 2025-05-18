@@ -141,8 +141,7 @@ public class BiometricFragment extends InstrumentedFragment {
                 .setDisallowBiometricsIfPolicyExists(
                         promptInfo.isDisallowBiometricsIfPolicyExists())
                 .setShowEmergencyCallButton(promptInfo.isShowEmergencyCallButton())
-                .setReceiveSystemEvents(true)
-                .setClassNameIfItIsConfirmDeviceCredentialActivity();
+                .setReceiveSystemEvents(true);
 
         if (Flags.enableBiometricsToUnlockPrivateSpace()) {
             promptBuilder = promptBuilder.setAllowBackgroundAuthentication(true /* allow */,

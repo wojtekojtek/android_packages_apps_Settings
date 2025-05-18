@@ -33,6 +33,7 @@ import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.AppOpsManager;
+import android.app.backup.BackupManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -60,11 +61,7 @@ import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.datastore.ChangeReason;
-import com.android.settingslib.datastore.Observer;
 import com.android.settingslib.widget.LayoutPreference;
-
-import com.google.common.util.concurrent.MoreExecutors;
 
 import org.junit.After;
 import org.junit.Before;
@@ -119,10 +116,9 @@ public class AdvancedPowerUsageDetailTest {
     @Mock private AppOpsManager mAppOpsManager;
     @Mock private LoaderManager mLoaderManager;
     @Mock private BatteryOptimizeUtils mBatteryOptimizeUtils;
-    @Mock private Observer mObserver;
+    @Mock private BackupManager mBackupManager;
 
     private Context mContext;
-    private BatterySettingsStorage mBatterySettingsStorage;
     private PrimarySwitchPreference mAllowBackgroundUsagePreference;
     private AdvancedPowerUsageDetail mFragment;
     private SettingsActivity mTestActivity;
@@ -134,7 +130,6 @@ public class AdvancedPowerUsageDetailTest {
     @Before
     public void setUp() {
         mContext = spy(ApplicationProvider.getApplicationContext());
-        mBatterySettingsStorage = BatterySettingsStorage.get(mContext);
         when(mContext.getPackageName()).thenReturn("foo");
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = mFeatureFactory.metricsFeatureProvider;
@@ -205,6 +200,7 @@ public class AdvancedPowerUsageDetailTest {
         mFragment.mHeaderPreference = mHeaderPreference;
         mFragment.mState = mState;
         mFragment.mBatteryOptimizeUtils = mBatteryOptimizeUtils;
+        mFragment.mBackupManager = mBackupManager;
         mFragment.mLogStringBuilder = new StringBuilder();
         mAppEntry.info = mock(ApplicationInfo.class);
 
@@ -451,30 +447,23 @@ public class AdvancedPowerUsageDetailTest {
 
     @Test
     public void notifyBackupManager_optimizationModeIsNotChanged_notInvokeDataChanged() {
-        mBatterySettingsStorage.addObserver(mObserver, MoreExecutors.directExecutor());
         final int mode = BatteryOptimizeUtils.MODE_RESTRICTED;
         mFragment.mOptimizationMode = mode;
         when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(mode);
 
         mFragment.notifyBackupManager();
 
-        verifyNoInteractions(mObserver);
+        verifyNoInteractions(mBackupManager);
     }
 
     @Test
     public void notifyBackupManager_optimizationModeIsChanged_invokeDataChanged() {
-        mBatterySettingsStorage.addObserver(mObserver, MoreExecutors.directExecutor());
         mFragment.mOptimizationMode = BatteryOptimizeUtils.MODE_RESTRICTED;
         when(mBatteryOptimizeUtils.getAppOptimizationMode())
                 .thenReturn(BatteryOptimizeUtils.MODE_UNRESTRICTED);
 
         mFragment.notifyBackupManager();
 
-        verify(mObserver).onChanged(ChangeReason.UPDATE);
-    }
-
-    @Test
-    public void shouldSkipForInitialSUW_returnTrue() {
-        assertThat(mFragment.shouldSkipForInitialSUW()).isTrue();
+        verify(mBackupManager).dataChanged();
     }
 }

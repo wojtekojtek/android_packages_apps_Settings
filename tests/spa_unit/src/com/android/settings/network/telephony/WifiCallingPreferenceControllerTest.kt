@@ -62,7 +62,6 @@ class WifiCallingPreferenceControllerTest {
 
     private val mockWifiCallingRepository = mock<WifiCallingRepository> {
         on { getWiFiCallingMode() } doReturn ImsMmTelManager.WIFI_MODE_UNKNOWN
-        on { wifiCallingReadyFlow() } doReturn flowOf(true)
     }
 
     private val callingPreferenceCategoryController =
@@ -72,7 +71,7 @@ class WifiCallingPreferenceControllerTest {
         context = context,
         key = TEST_KEY,
         callStateFlowFactory = { flowOf(callState) },
-        wifiCallingRepositoryFactory = { mockWifiCallingRepository },
+        wifiCallingRepository = { mockWifiCallingRepository },
     ).init(subId = SUB_ID, callingPreferenceCategoryController)
 
     @Before

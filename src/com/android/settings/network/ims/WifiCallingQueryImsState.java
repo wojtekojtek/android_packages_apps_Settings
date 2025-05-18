@@ -27,8 +27,6 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.settings.network.telephony.wificalling.WifiCallingRepository;
-
 /**
  * Controller class for querying Wifi calling status
  */
@@ -94,9 +92,7 @@ public class WifiCallingQueryImsState extends ImsQueryController  {
      * Check whether Wifi Calling can be perform or not on this subscription
      *
      * @return true when Wifi Calling can be performed, otherwise false
-     * @deprecated Use {@link WifiCallingRepository#wifiCallingReadyFlow()} instead.
      */
-    @Deprecated
     public boolean isReadyToWifiCalling() {
         if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
             return false;

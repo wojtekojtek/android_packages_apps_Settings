@@ -278,11 +278,6 @@
     <!-- Whether Settings intelligence supports presenting Slices. -->
     <bool name="config_settingsintelligence_slice_supported">false</bool>
 
-    <!-- Sound picker package name -->
-    <string name="config_sound_picker_package_name" translatable="false">
-        com.android.soundpicker
-    </string>
-
     <!-- AOSP Emergency app package name -->
     <string name="config_aosp_emergency_package_name" translatable="false">
         com.android.emergency
@@ -812,9 +807,5 @@
 
     <!-- Array of carrier id to allow the pSIM conversion-->
     <integer-array name="config_psim_conversion_menu_enabled_carrier" translatable="false">
-    </integer-array>
-
-    <!-- Array of carrier id that uses reusable activation code-->
-    <integer-array name="config_carrier_use_rac" translatable="false">
     </integer-array>
 </resources>

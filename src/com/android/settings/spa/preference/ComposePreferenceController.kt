@@ -24,7 +24,7 @@ import com.android.settings.core.BasePreferenceController
 abstract class ComposePreferenceController(context: Context, preferenceKey: String) :
     BasePreferenceController(context, preferenceKey) {
 
-    protected lateinit var preference: ComposePreference
+    private lateinit var preference: ComposePreference
 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)

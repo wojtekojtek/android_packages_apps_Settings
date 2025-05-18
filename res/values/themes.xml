@@ -46,7 +46,7 @@
         <item name="wifi_signal_color">?android:attr/colorAccent</item>
         <item name="wifi_friction">@drawable/wifi_friction</item>
 
-        <item name="side_margin">0dp</item>
+        <item name="side_margin">@dimen/screen_margin_sides</item>
         <item name="sudListItemIconColor">?android:attr/colorAccent</item>
 
         <!-- Redefine the ActionBar style for contentInsetStart -->

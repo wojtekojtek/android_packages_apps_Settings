@@ -26,7 +26,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityHearingAidsFragment;
-import com.android.settings.accessibility.ArrowPreference;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -84,7 +83,7 @@ public class BluetoothDetailsHearingDeviceControlsController extends BluetoothDe
     }
 
     private Preference createHearingDeviceControlsPreference(Context context) {
-        final ArrowPreference preference = new ArrowPreference(context);
+        final Preference preference = new Preference(context);
         preference.setKey(KEY_HEARING_DEVICE_CONTROLS);
         preference.setTitle(context.getString(R.string.bluetooth_device_controls_title));
         preference.setSummary(context.getString(R.string.bluetooth_device_controls_summary));

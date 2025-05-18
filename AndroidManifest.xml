@@ -486,17 +486,6 @@
         </activity>
 
         <activity
-            android:name=".network.NetworkSetupActivity"
-            android:exported="true">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.NETWORK_PROVIDER_SETUP" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true" />
-        </activity>
-
-        <activity
             android:name=".wifi.WifiPickerActivity"
             android:permission="android.permission.CHANGE_WIFI_STATE"
             android:exported="true">
@@ -2520,22 +2509,6 @@
         </activity>
 
         <activity
-            android:name="Settings$ColorContrastActivity"
-            android:exported="true"
-            android:label="@string/accessibility_color_contrast_title">
-            <intent-filter>
-                <action android:name="android.settings.ACCESSIBILITY_COLOR_CONTRAST_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.accessibility.ColorContrastFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                android:value="@string/menu_key_accessibility"/>
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true" />
-        </activity>
-
-        <activity
             android:name="Settings$TextToSpeechSettingsActivity"
             android:exported="true"
             android:label="@string/tts_settings">
@@ -2879,10 +2852,6 @@
             android:exported="false"
             android:label="@string/lockpassword_choose_lock_generic_header"
             android:excludeFromRecents="true" />
-
-        <activity android:name=".password.ChooseLockPatternSize"
-            android:exported="false"
-            android:theme="@style/GlifTheme.Light" />
 
         <activity android:name=".password.SetupChooseLockPattern"
             android:exported="false"
@@ -4713,6 +4682,22 @@
         </activity>
 
         <activity
+            android:name="Settings$AudioStreamConfirmDialogActivity"
+            android:exported="true"
+            android:theme="@style/Transparent"
+            android:permission="android.permission.BLUETOOTH_CONNECT"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.AUDIO_STREAM_DIALOG" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamConfirmDialog" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
             android:name=".Settings$PreviouslyConnectedDeviceActivity"
             android:label="@string/connected_device_saved_title"
             android:exported="true"
@@ -5067,6 +5052,16 @@
         </activity>
 
         <activity
+            android:name="com.android.settings.connecteddevice.audiosharing.audiostreams.qrcode.QrCodeScanModeActivity"
+            android:permission="android.permission.BLUETOOTH_CONNECT"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.settings.BLUETOOTH_LE_AUDIO_QR_CODE_SCANNER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".spa.SpaActivity"
             android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize"
             android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
@@ -5142,21 +5137,8 @@
 
         <activity
             android:name="com.android.settings.network.WepNetworkDialogActivity"
-            android:exported="true"
-            android:theme="@style/Theme.SpaLib.Dialog"
-            android:permission="android.permission.NETWORK_SETTINGS">
-        </activity>
-
-        <activity android:name=".backup.transport.TransportActivity"
-                  android:label="@string/backup_transport_title"
-                  android:icon="@drawable/ic_settings_backup"
-                  android:exported="false">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="settings"
-                      android:host="com.android.settings.backup.transport" />
-            </intent-filter>
+            android:exported="false"
+            android:theme="@style/Theme.SpaLib.Dialog">
         </activity>
 
         <!-- This is the longest AndroidManifest.xml ever. -->

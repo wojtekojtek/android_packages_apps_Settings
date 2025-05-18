@@ -61,8 +61,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-// TODO(b/327638540): Update implementation of preference here and reuse key preferences and
-//  controllers between here and A11y Setting page.
 @SearchIndexable
 public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         implements InputManager.InputDeviceListener,
@@ -70,7 +68,6 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
 
     private static final String KEYBOARD_OPTIONS_CATEGORY = "keyboard_options_category";
     private static final String KEYBOARD_A11Y_CATEGORY = "keyboard_a11y_category";
-    private static final String KEYBOARD_EXTRAS_CATEGORY = "keyboard_extras_category";
     private static final String SHOW_VIRTUAL_KEYBOARD_SWITCH = "show_virtual_keyboard_switch";
     private static final String ACCESSIBILITY_BOUNCE_KEYS = "accessibility_bounce_keys";
     private static final String ACCESSIBILITY_SLOW_KEYS = "accessibility_slow_keys";
@@ -86,8 +83,6 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
             Secure.ACCESSIBILITY_SLOW_KEYS);
     private static final Uri sAccessibilityStickyKeysUri = Secure.getUriFor(
             Secure.ACCESSIBILITY_STICKY_KEYS);
-    public static final int BOUNCE_KEYS_THRESHOLD = 500;
-    public static final int SLOW_KEYS_THRESHOLD = 500;
 
     @NonNull
     private final ArrayList<HardKeyboardDeviceInfo> mLastHardKeyboards = new ArrayList<>();
@@ -108,8 +103,6 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     private TwoStatePreference mAccessibilitySlowKeys = null;
     @Nullable
     private TwoStatePreference mAccessibilityStickyKeys = null;
-    @NonNull
-    private PreferenceCategory mKeyboardExtrasCategory;
 
 
     private Intent mIntentWaitingForResult;
@@ -139,16 +132,10 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         mKeyboardA11yCategory = Objects.requireNonNull(findPreference(KEYBOARD_A11Y_CATEGORY));
         mAccessibilityBounceKeys = Objects.requireNonNull(
                 mKeyboardA11yCategory.findPreference(ACCESSIBILITY_BOUNCE_KEYS));
-        mAccessibilityBounceKeys.setSummary(
-                getContext().getString(R.string.bounce_keys_summary, BOUNCE_KEYS_THRESHOLD));
         mAccessibilitySlowKeys = Objects.requireNonNull(
                 mKeyboardA11yCategory.findPreference(ACCESSIBILITY_SLOW_KEYS));
-        mAccessibilitySlowKeys.setSummary(
-                getContext().getString(R.string.slow_keys_summary, SLOW_KEYS_THRESHOLD));
         mAccessibilityStickyKeys = Objects.requireNonNull(
                 mKeyboardA11yCategory.findPreference(ACCESSIBILITY_STICKY_KEYS));
-        mKeyboardExtrasCategory = Preconditions.checkNotNull(
-                (PreferenceCategory) findPreference(KEYBOARD_EXTRAS_CATEGORY));
 
         FeatureFactory featureFactory = FeatureFactory.getFeatureFactory();
         mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
@@ -293,11 +280,19 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
             final Preference pref = new Preference(getPrefContext());
             pref.setTitle(hardKeyboardDeviceInfo.mDeviceName);
             if (mIsNewKeyboardSettings) {
-                String currentLayout =
-                        NewKeyboardSettingsUtils.getSelectedKeyboardLayoutLabelForUser(getContext(),
-                                UserHandle.myUserId(), hardKeyboardDeviceInfo.mDeviceIdentifier);
-                if (currentLayout != null) {
-                    pref.setSummary(currentLayout);
+                List<String> suitableImes = new ArrayList<>();
+                suitableImes.addAll(
+                        NewKeyboardSettingsUtils.getSuitableImeLabels(
+                                getContext(), mImm, UserHandle.myUserId()));
+                if (!suitableImes.isEmpty()) {
+                    String summary = suitableImes.get(0);
+                    StringBuilder result = new StringBuilder(summary);
+                    for (int i = 1; i < suitableImes.size(); i++) {
+                        result.append(", ").append(suitableImes.get(i));
+                    }
+                    pref.setSummary(result.toString());
+                } else {
+                    pref.setSummary(hardKeyboardDeviceInfo.mLayoutLabel);
                 }
                 pref.setOnPreferenceClickListener(
                         preference -> {
@@ -341,8 +336,6 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
             updateAccessibilitySlowKeysSwitch();
             updateAccessibilityStickyKeysSwitch();
         }
-        mKeyboardExtrasCategory.setOrder(99);
-        preferenceScreen.addPreference(mKeyboardExtrasCategory);
     }
 
     private void showKeyboardLayoutDialog(InputDeviceIdentifier inputDeviceIdentifier) {

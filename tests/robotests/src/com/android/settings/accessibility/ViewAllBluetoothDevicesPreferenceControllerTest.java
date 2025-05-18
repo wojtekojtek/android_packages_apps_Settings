@@ -56,7 +56,7 @@ public class ViewAllBluetoothDevicesPreferenceControllerTest {
     private final String TEST_KEY = "test_key";
 
     @Spy
-    private HearingDevicePairingFragment mFragment = new HearingDevicePairingFragment();
+    private HearingDevicePairingDetail mFragment = new HearingDevicePairingDetail();
     private FragmentActivity mActivity;
     @Mock
     private PreferenceScreen mScreen;
@@ -74,13 +74,13 @@ public class ViewAllBluetoothDevicesPreferenceControllerTest {
     }
 
     @Test
-    public void handlePreferenceTreeClick_expectedPreference_launchConnectedDevicePage() {
-        doNothing().when(mController).launchConnectedDevicePage();
+    public void handlePreferenceTreeClick_expectedPreference_launchBluetoothPairingDetail() {
+        doNothing().when(mController).launchBluetoothPairingDetail();
         mPreference.setKey(TEST_KEY);
 
         boolean status = mController.handlePreferenceTreeClick(mPreference);
 
-        verify(mController).launchConnectedDevicePage();
+        verify(mController).launchBluetoothPairingDetail();
         assertThat(status).isTrue();
     }
 }

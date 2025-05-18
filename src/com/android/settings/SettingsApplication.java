@@ -28,13 +28,11 @@ import androidx.annotation.NonNull;
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.core.instrumentation.ElapsedTimeUtils;
-import com.android.settings.fuelgauge.BatterySettingsStorage;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.FeatureFactoryImpl;
 import com.android.settings.spa.SettingsSpaEnvironment;
 import com.android.settingslib.applications.AppIconCacheManager;
-import com.android.settingslib.datastore.BackupRestoreStorageManager;
 import com.android.settingslib.spa.framework.common.SpaEnvironmentFactory;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -56,8 +54,6 @@ public class SettingsApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        BackupRestoreStorageManager.getInstance(this).add(new BatterySettingsStorage(this));
-
         // Add null checking to avoid test case failed.
         if (getApplicationContext() != null) {
             ElapsedTimeUtils.assignSuwFinishedTimeStamp(getApplicationContext());
@@ -75,12 +71,6 @@ public class SettingsApplication extends Application {
                 new DeviceProvisionedObserver().registerContentObserver();
             }
         }
-    }
-
-    @Override
-    public void onTerminate() {
-        BackupRestoreStorageManager.getInstance(this).removeAll();
-        super.onTerminate();
     }
 
     @NonNull

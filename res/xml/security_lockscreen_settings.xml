@@ -116,25 +116,11 @@
             settings:searchable="false"
             settings:controller="com.android.settings.gestures.PickupGesturePreferenceController" />
 
-        <Preference
-            android:key="gesture_screen_off_udfps_input_summary"
-            android:title="@string/ambient_display_screen_off_udfps_title"
-            android:fragment="com.android.settings.gestures.ScreenOffUdfpsSettings"
-            settings:searchable="false"
-            settings:controller="com.android.settings.gestures.ScreenOffUdfpsPreferenceController" />
-
         <SwitchPreferenceCompat
             android:key="ambient_display_notification"
             android:title="@string/doze_title"
             android:summary="@string/doze_summary"
             settings:controller="com.android.settings.display.AmbientDisplayNotificationsPreferenceController" />
-
-        <lineageos.preference.RemotePreference
-            android:key="doze_device_settings"
-            android:title="@string/ambient_display_screen_title"
-            settings:replacesKey="ambient_display_always_on|ambient_display_notification">
-            <intent android:action="org.lineageos.settings.device.DOZE_SETTINGS" />
-        </lineageos.preference.RemotePreference>
 
     </PreferenceCategory>
 

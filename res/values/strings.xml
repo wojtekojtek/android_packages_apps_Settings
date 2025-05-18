@@ -152,10 +152,10 @@
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button">Pair left ear</string>
     <!-- Title for all hearing devices related controls section. [CHAR LIMIT=60] -->
     <string name="bluetooth_device_controls_general">For all available hearing devices</string>
-    <!-- Connected devices settings. Title of the preference to show the entrance of the hearing device settings related page. [CHAR LIMIT=65] -->
-    <string name="bluetooth_device_controls_title">More hearing device settings</string>
-    <!-- Connected devices settings. Summary of the preference to show the item in the hearing device settings related page. [CHAR LIMIT=120] -->
-    <string name="bluetooth_device_controls_summary">Change cross-device settings like shortcut, and telecoil controls</string>
+    <!-- Connected devices settings. Title of the preference to show the entrance of the hearing device controls related page. [CHAR LIMIT=65] -->
+    <string name="bluetooth_device_controls_title">Hearing device settings</string>
+    <!-- Connected devices settings. Title of the preference to show the entrance of the hearing device controls related page. [CHAR LIMIT=65] -->
+    <string name="bluetooth_device_controls_summary">Shortcut, hearing aid compatibility</string>
     <!-- Title for this device specific controls section. [CHAR LIMIT=30] -->
     <string name="bluetooth_device_controls_specific">For this device</string>
     <!-- Connected devices settings. Title of the preference to show the entrance of the audio output page. It can change different types of audio are played on phone or other bluetooth devices. [CHAR LIMIT=35] -->
@@ -300,6 +300,21 @@
     <!-- Name shown in the title of individual stylus preference in the connected devices page [CHAR LIMIT=60] -->
     <string name="stylus_connected_devices_title">Stylus</string>
 
+    <!-- Title for audio sharing page [CHAR LIMIT=none]-->
+    <string name="audio_sharing_title">Audio sharing</string>
+    <!-- Title for audio sharing primary switch [CHAR LIMIT=none]-->
+    <string name="audio_sharing_switch_title">Share audio</string>
+    <!-- Title for calls and alarms device on audio sharing page [CHAR LIMIT=none]-->
+    <string name="calls_and_alarms_device_title">Calls and alarms</string>
+
+    <!-- Title for audio streams preference category [CHAR LIMIT=none]-->
+    <string name="audio_streams_category_title">Connect to a LE audio stream</string>
+    <!-- Title for audio streams preference [CHAR LIMIT=none]-->
+    <string name="audio_streams_pref_title">Nearby audio streams</string>
+    <!-- Title for audio streams page [CHAR LIMIT=none]-->
+    <string name="audio_streams_title">Audio streams</string>
+    <!-- Summary for QR code scanning in audio streams page [CHAR LIMIT=none]-->
+    <string name="audio_streams_qr_code_summary">Connect to an audio stream using QR code</string>
     <!--Text that appears when scanning for nearby audio streams is finished and no streams were found [CHAR LIMIT=40]-->
     <string name="audio_streams_empty">No nearby audio streams were found.</string>
 
@@ -1318,7 +1333,7 @@
     <!-- Title for private space setup in auto advancing screen informing to explore private space settings for hide and auto lock. [CHAR LIMIT=NONE] -->
     <string name="private_space_explore_settings_title">Explore private space settings to hide private space and set up automatic locking</string>
     <!-- Title for private space setup in auto advancing screen informing some system apps are already installed in private space. [CHAR LIMIT=NONE] -->
-    <string name="private_space_apps_installed_title">Required apps are already installed in your private space</string>
+    <string name="private_space_apps_installed_title">Some apps are already installed in your private space</string>
     <!-- Title for private space creation error screen. [CHAR LIMIT=60] -->
     <string name="private_space_error_screen_title">Couldn\u2019t set up a private space</string>
     <!-- Label for button to retry creating private space again on creation error. [CHAR LIMIT=30] -->
@@ -1363,22 +1378,6 @@
     <string name="private_space_notifications_title">Sensitive notifications on lock screen</string>
     <!-- Summary description for private space sensitive notifications toggle [CHAR LIMIT=200] -->
     <string name="private_space_sensitive_notifications_description">Show sensitive content when private space is unlocked</string>
-    <!-- Title for private space GAIA education screen [CHAR LIMIT=90] -->
-    <string name="private_space_gaia_education_title">Create a Google Account to help keep your data private</string>
-    <!-- Description for private space GAIA education screen [CHAR LIMIT=120] -->
-    <string name="private_space_gaia_education_description">On the next screen you can sign in to an account to use with your private space</string>
-    <!-- Sub header for private space GAIA education screen [CHAR LIMIT=120] -->
-    <string name="private_space_gaia_education_header"><b>Create a dedicated account to help stop data appearing outside private space, such as:</b></string>
-    <!-- Text for private space GAIA education screen [CHAR LIMIT=90] -->
-    <string name="private_space_gaia_education_bullet1">Synced photos, files, emails, contacts, calendar events, and other data</string>
-    <!-- Text for private space GAIA education screen [CHAR LIMIT=60] -->
-    <string name="private_space_gaia_education_bullet2">App download history and recommendations</string>
-    <!-- Text for private space GAIA education screen [CHAR LIMIT=60] -->
-    <string name="private_space_gaia_education_bullet3">Browsing history, bookmarks, and saved passwords</string>
-    <!-- Text for private space GAIA education screen [CHAR LIMIT=90] -->
-    <string name="private_space_gaia_education_bullet4">Suggested content related to your activity in private space apps</string>
-    <!-- Text for button in private space GAIA education screen to start login [CHAR LIMIT=20] -->
-    <string name="private_space_gaia_education_got_it">Got it</string>
 
     <!-- Text shown when "Add fingerprint" button is disabled -->
     <string name="fingerprint_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
@@ -2060,10 +2059,6 @@
     <string name="wifi_settings_wep_networks_button_allow">Allow WEP</string>
     <!-- Wi-Fi settings dialog. Button text of dialog displayed when WEP network toggle is blocked. [CHAR LIMIT=NONE] -->
     <string name="wifi_settings_ssid_block_button_close">Close</string>
-    <!-- Wi-Fi settings dialog. Title of dialog displayed when the user turns off “Allow WEP networks” while connected to a WEP network. [CHAR LIMIT=NONE] -->
-    <string name="wifi_settings_wep_networks_disconnect_title">Disconnect from <xliff:g id="name">%1$s</xliff:g>?</string>
-    <!-- Wi-Fi settings dialog. Summary text of dialog displayed when the user turns off “Allow WEP networks” while connected to a WEP network. [CHAR LIMIT=NONE] -->
-    <string name="wifi_settings_wep_networks_disconnect_summary">You\u0027re connected to a WEP network. If you block these networks, you\u0027ll be disconnected.</string>
 
     <!-- Dialog for Access Points --> <skip />
     <!-- Label to show/hide advanced options [CHAR LIMIT=40] -->
@@ -2130,14 +2125,6 @@
     <string name="wifi_ip_settings">IP settings</string>
     <!-- Label for the spinner to show Wifi MAC randomization [CHAR LIMIT=25] -->
     <string name="wifi_privacy_settings">Privacy</string>
-    <!-- Category title for the spinner to show Wifi MAC randomization [CHAR LIMIT=25] -->
-    <string name="wifi_privacy_mac_settings">MAC</string>
-    <!-- Category title for Device name [CHAR LIMIT=25] -->
-    <string name="wifi_privacy_device_name_settings">Device name</string>
-    <!-- Toggle button title for allowing/disallowing sending device name to DHCP [CHAR LIMIT=50] -->
-    <string name="wifi_privacy_send_device_name_toggle_title">Send device name</string>
-    <!-- Toggle button title for allowing/disallowing sending device name to DHCP [CHAR LIMIT=50] -->
-    <string name="wifi_privacy_send_device_name_toggle_summary">Share this device\u0027s name with the network</string>
     <!-- Label for the subscription preference. [CHAR LIMIT=32] -->
     <string name="wifi_subscription">Subscription</string>
     <!-- Summary text for the subscription preference. [CHAR LIMIT=NONE] -->
@@ -3441,11 +3428,11 @@
     <!-- Button title to factory data reset the entire device. The "(factory reset)" part is optional for translation. [CHAR LIMIT=30 BACKUP_MESSAGE_ID=3531267871084279512]-->
     <string name="main_clear_short_title">Erase all data (factory reset)</string>
     <!-- SD card & phone storage settings screen, list of items in user data storage (USB storage or SD card) that will be erased during this operation [CHAR LIMIT=NONE] -->
-    <string name="main_clear_desc_also_erases_external"><li>Music</li>\n<li>Photos</li>\n<li>Other user data</li></string>
+    <string name="main_clear_desc_also_erases_external">"<li>Music</li>\n<li>Photos</li>\n<li>Other user data</li>"</string>
     <!-- SD card & phone storage settings screen, list of items on an eSIM (embedded SIM) that will be erased during this operation [CHAR LIMIT=NONE] -->
-    <string name="main_clear_desc_also_erases_esim"><li>eSIMs</li></string>
+    <string name="main_clear_desc_also_erases_esim">"<li>eSIMs</li>"</string>
     <!-- SD card & phone storage settings screen, notification if there are eSIM (embedded SIM) profiles present that the user's mobile service plan will not be canceled [CHAR LIMIT=NONE] -->
-    <string name="main_clear_desc_no_cancel_mobile_plan">\n\nThis will not cancel your mobile service plan.</string>
+    <string name="main_clear_desc_no_cancel_mobile_plan">"\n\nThis will not cancel your mobile service plan.</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset phone button [CHAR LIMIT=NONE] -->
     <string name="main_clear_final_desc">All of your personal information and downloaded apps will be deleted. You can\u2019t undo this action.</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset phone button [CHAR LIMIT=NONE] -->
@@ -4345,16 +4332,16 @@
     <string name="show_ime_summary">Keep it on screen while physical keyboard is active</string>
     <!-- Title for the 'Bounce keys' preference switch. [CHAR LIMIT=35] -->
     <string name="bounce_keys">Bounce keys</string>
-    <!-- Summary text for the 'Bounce keys' preference sub-screen. [CHAR LIMIT=300] -->
-    <string name="bounce_keys_summary">The keyboard ignores quickly repeated presses of the same key within <xliff:g id="bounce_keys_threshold" example="500">%1$d</xliff:g> ms</string>
+    <!-- Summary text for the 'Bounce keys' preference sub-screen. [CHAR LIMIT=100] -->
+    <string name="bounce_keys_summary">Enable Bounce keys for physical keyboard accessibility</string>
     <!-- Title for the 'Slow keys' preference switch. [CHAR LIMIT=35] -->
     <string name="slow_keys">Slow keys</string>
-    <!-- Summary text for the 'Slow keys' preference sub-screen. [CHAR LIMIT=300] -->
-    <string name="slow_keys_summary">Adjusts the time it takes for a key press to activate to <xliff:g id="slow_keys_threshold" example="500">%1$d</xliff:g> ms</string>
+    <!-- Summary text for the 'Slow keys' preference sub-screen. [CHAR LIMIT=100] -->
+    <string name="slow_keys_summary">Enable Slow keys for physical keyboard accessibility</string>
     <!-- Title for the 'Sticky keys' preference switch. [CHAR LIMIT=35] -->
     <string name="sticky_keys">Sticky keys</string>
-    <!-- Summary text for the 'Sticky keys' preference sub-screen. [CHAR LIMIT=300] -->
-    <string name="sticky_keys_summary">Press one key at a time for shortcuts instead of holding keys down together</string>
+    <!-- Summary text for the 'Sticky keys' preference sub-screen. [CHAR LIMIT=100] -->
+    <string name="sticky_keys_summary">Enable Sticky keys for physical keyboard accessibility</string>
     <!-- Title for the button to trigger the 'keyboard shortcuts helper' dialog. [CHAR LIMIT=35] -->
     <string name="keyboard_shortcuts_helper">Keyboard shortcuts</string>
     <!-- Summary text for the 'keyboard shortcuts helper' dialog. [CHAR LIMIT=100] -->
@@ -4478,14 +4465,8 @@
     <!-- Summary for the modifier key picker dialog page [CHAR LIMIT=35] -->
     <string name="modifier_keys_picker_summary">Choose a new key for <xliff:g id="modifier_key_default_name">%1$s</xliff:g>:</string>
 
-    <!-- Title text for per IME subtype keyboard layout. [CHAR LIMIT=35] -->
-    <string name="ime_label_title"><xliff:g id="ime_label" example="Gboard">%s</xliff:g> layout</string>
     <!-- Summary text for keyboards when no layout has been selected. [CHAR LIMIT=35] -->
     <string name="default_keyboard_layout">Default</string>
-    <!-- Summary text for keyboards when a layout is automatically selected. [CHAR LIMIT=35] -->
-    <string name="automatic_keyboard_layout_label">Automatic: <xliff:g id="layout_label" example="English(US)">%s</xliff:g></string>
-    <!-- Summary text for keyboards when a layout is user selected. [CHAR LIMIT=35] -->
-    <string name="user_selected_keyboard_layout_label">User selected: <xliff:g id="layout_label" example="English(US)">%s</xliff:g></string>
 
     <!-- Title for the 'Speech' preference category. [CHAR LIMIT=45] -->
     <string name="speech_category_title">Speech</string>
@@ -4624,8 +4605,6 @@
     <string name="vision_settings_suggestion_title">Change font size</string>
     <!-- Title for the accessibility preference category of screen reader services and settings. [CHAR LIMIT=50] -->
     <string name="screen_reader_category_title">Screen reader</string>
-    <!-- Title for the accessibility preference category of physical keyboard options. [CHAR LIMIT=50] -->
-    <string name="keyboard_category_title">Physical keyboard options</string>
     <!-- Title for the accessibility preference category of caption services and settings. [CHAR LIMIT=50] -->
     <string name="captions_category_title">Captions</string>
     <!-- Title for the accessibility preference category of audio services and settings. [CHAR LIMIT=50] -->
@@ -4636,28 +4615,6 @@
     <string name="display_category_title">Display</string>
     <!-- Title for the accessibility color and motion page. [CHAR LIMIT=50] -->
     <string name="accessibility_color_and_motion_title">Color and motion</string>
-    <!-- Title for the accessibility color contrast page. [CHAR LIMIT=50] -->
-    <string name="accessibility_color_contrast_title">Color contrast</string>
-    <!-- Intro for the accessibility color contrast page. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_color_contrast_intro">Higher contrast makes text, buttons, and icons stand out more. Choose the contrast that looks best to you.</string>
-    <!-- Notes in color contrast page footer for something should be aware. [CHAR LIMIT=NONE]  -->
-    <string name="color_contrast_note">Some apps may not support all color and text contrast settings</string>
-    <!-- Summary for the accessibility color setting. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_color_contrast_summary">Adjust how colors and text look against your screen\'s background color</string>
-    <!-- Preview screen title on the color contrast page. [CHAR LIMIT=20]  -->
-    <string name="color_contrast_preview">Preview</string>
-    <!-- Preview screen email sender's name on the color contrast page. [CHAR LIMIT=15]  -->
-    <string name="color_contrast_preview_sender_name">Helen, Adam</string>
-    <!-- Preview screen email sent date on the color contrast page. [CHAR LIMIT=15]  -->
-    <string name="color_contrast_preview_email_send_date">2 days ago</string>
-    <!-- Preview screen email badge on the contrast page. [CHAR LIMIT=15]  -->
-    <string name="color_contrast_preview_email_badge">Follow up?</string>
-    <!-- Preview screen email title on the contrast page. [CHAR LIMIT=30]  -->
-    <string name="color_contrast_preview_email_title">Business trip report</string>
-    <!-- Preview screen email body on the contrast page. [CHAR LIMIT=NONE]  -->
-    <string name="color_contrast_preview_email_body">For further assistance, please reach out to \nmyself or Helen. This report will be</string>
-    <!-- Preview screen email attachment name on the contrast page. [CHAR LIMIT=30]  -->
-    <string name="color_contrast_preview_email_attachment_name">Client Expenses</string>
     <!-- Title for the accessibility text options page. [CHAR LIMIT=50] -->
     <string name="accessibility_turn_screen_darker_title">Turn screen darker</string>
     <!-- Title for the accessibility preference category of interaction control services and settings. [CHAR LIMIT=50] -->
@@ -4959,10 +4916,6 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title">High contrast text</string>
     <!-- Summary for the accessibility preference to high contrast text. [CHAR LIMIT=NONE] -->
     <string name="accessibility_toggle_high_text_contrast_preference_summary">Change text color to black or white. Maximizes contrast with the background.</string>
-    <!-- Title for the accessibility preference to high contrast text. [CHAR LIMIT=35] -->
-    <string name="accessibility_toggle_maximize_text_contrast_preference_title">Maximize text contrast</string>
-    <!-- Summary for the accessibility preference to high contrast text. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary">Change text color to black or white to increase contrast with the background.</string>
     <!-- Title for the accessibility preference to auto update screen magnification. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title">Auto
         update screen magnification</string>
@@ -5166,14 +5119,14 @@
     <!-- Generic title for editing the shortcuts of multiple accessibility features. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_screen_title">Edit accessibility shortcuts</string>
     <!-- Prompt for editing the shortcuts of multiple accessibility features. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_screen_prompt">Choose your shortcut for %1$s</string>
+    <string name="accessibility_shortcut_edit_screen_prompt">Chose your shortcut for %1$s</string>
 
     <!-- Button text for the accessibility dialog continue to the next screen for hearing aid. [CHAR LIMIT=32] -->
     <string name="accessibility_hearingaid_instruction_continue_button">Continue</string>
     <!-- Title for the accessibility preference for hearing devices. [CHAR LIMIT=35] -->
     <string name="accessibility_hearingaid_title">Hearing devices</string>
-    <!-- Introduction for the Hearing devices page to introduce feature. [CHAR LIMIT=NONE BACKUP_MESSAGE_ID=5856992709195963850] -->
-    <string name="accessibility_hearingaid_intro">Set up and manage ASHA and LE Audio hearing aids, cochlear implants, and other amplification devices</string>
+    <!-- Introduction for the Hearing devices page to introduce feature. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_hearingaid_intro">You can use hearing aids, cochlear implants, and other amplification devices with your phone</string>
     <!-- Summary for the accessibility preference for hearing aid when not connected. [CHAR LIMIT=50] -->
     <string name="accessibility_hearingaid_not_connected_summary">No hearing devices connected</string>
     <!-- Summary for the accessibility preference for hearing aid when adding new devices. [CHAR LIMIT=50] -->
@@ -5194,6 +5147,8 @@
     <string name="accessibility_hearingaid_more_device_summary"><xliff:g id="device_name" example="GN Hearing Aids">%1$s</xliff:g> +1 more</string>
     <!-- Title for the hearing device pairing preference. [CHAR LIMIT=20] -->
     <string name="accessibility_hearing_device_pairing_title">Pair new device</string>
+    <!-- Title for accessibility pair new hearing device page footer. [CHAR LIMIT=60] -->
+    <string name="accessibility_pair_hearing_device_about_title">About Pair new device</string>
     <!-- Title for the preference category containing the connected hearing device group. [CHAR LIMIT=20]-->
     <string name="accessibility_hearing_device_connected_title">Hearing devices</string>
     <!-- Title for the preference category containing the previously connected hearing device group. [CHAR LIMIT=20]-->
@@ -5208,12 +5163,10 @@
     <string name="accessibility_hac_mode_summary">Improves compatibility with telecoils and reduces unwanted noise</string>
     <!-- Title for accessibility hearing device page footer. [CHAR LIMIT=40] -->
     <string name="accessibility_hearing_device_about_title">About hearing devices</string>
-    <!-- Description for text in accessibility hearing aids footer. [CHAR LIMIT=NONE BACKUP_MESSAGE_ID=7451899224828040581] -->
-    <string name="accessibility_hearing_device_footer_summary">To find other hearing devices that aren’t supported by ASHA or LE Audio, tap <b>Pair new device</b> > <b>See more devices</b></string>
+    <!-- Description for text in accessibility hearing aids footer. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_hearing_device_footer_summary">Make sure your hearing device is turned on and ready to pair. Only ASHA and LE Audio hearing devices show on this page.</string>
     <!-- Title for the pair hearing device page. [CHAR LIMIT=25] -->
     <string name="accessibility_hearing_device_pairing_page_title">Pair hearing device</string>
-    <!-- Subtitle for the pair hearing device page. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_hearing_device_pairing_intro">You can pair ASHA and LE Audio hearing devices on this page. Make sure your hearing device is turned on and ready to pair.</string>
     <!-- Title for the preference category containing the list of the available hearing during and after bluetooth scanning devices. [CHAR LIMIT=30] -->
     <string name="accessibility_found_hearing_devices">Available hearing devices</string>
     <!-- Title for the preference category containing the all bluetooth devices during and after bluetooth scanning devices. Used when people can not find their hearing device in hearing device pairing list. [CHAR LIMIT=45] -->
@@ -11523,6 +11476,8 @@
     <!-- Mobile network settings screen, message asking the user to check their pricing with their Carrier, when enabling Data roaming. [CHAR LIMIT=NONE] -->
     <string name="roaming_check_price_warning">Check with your network provider for pricing.</string>
 
+    <!-- Title for mobile data preference, to display the mobile data usage for each app. [CHAR LIMIT=NONE]-->
+    <string name="mobile_data_usage_title">App data usage</string>
     <!-- Summary to show the current network mode is invalid. [CHAR LIMIT=NONE]-->
     <string name="mobile_network_mode_error">Invalid Network Mode <xliff:g id="networkModeId" example="0">%1$d</xliff:g>. Ignore.</string>
     <!-- Title for _satellite_setting_preference_layout in mobile network settings [CHAR LIMIT=60] -->
@@ -12352,15 +12307,6 @@
     <!-- Summary for UWB preference when UWB is unavailable due to regulatory requirements. [CHAR_LIMIT=NONE]-->
     <string name="uwb_settings_summary_no_uwb_regulatory">UWB is unavailable in the current location</string>
 
-    <!-- Title for Thread network preference [CHAR_LIMIT=60] -->
-    <string name="thread_network_settings_title">Thread</string>
-
-    <!-- Summary for Thread network preference. [CHAR_LIMIT=NONE]-->
-    <string name="thread_network_settings_summary">Connect to compatible devices using Thread for a seamless smart home experience</string>
-
-    <!-- Summary for Thread network preference when airplane mode is enabled. [CHAR_LIMIT=NONE]-->
-    <string name="thread_network_settings_summary_airplane_mode">Turn off airplane mode to use Thread</string>
-
     <!-- Label for the camera use toggle [CHAR LIMIT=40] -->
     <string name="camera_toggle_title">Camera access</string>
     <!-- Label for the camera use toggle [CHAR LIMIT=40] -->
@@ -12935,8 +12881,6 @@
     <string name="contrast_title">Contrast</string>
     <!-- 'Standard' contrast option [CHAR LIMIT=20] -->
     <string name="contrast_standard">Standard</string>
-    <!-- 'Default' contrast option [CHAR LIMIT=20] -->
-    <string name="contrast_default">Default</string>
     <!-- 'Medium' contrast option [CHAR LIMIT=20] -->
     <string name="contrast_medium">Medium</string>
     <!-- 'High' contrast option [CHAR LIMIT=20] -->

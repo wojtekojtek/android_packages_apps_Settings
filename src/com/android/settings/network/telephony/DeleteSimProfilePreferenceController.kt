@@ -33,7 +33,6 @@ import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 class DeleteSimProfilePreferenceController(context: Context, preferenceKey: String) :
     BasePreferenceController(context, preferenceKey) {
     private var subscriptionId: Int = SubscriptionManager.INVALID_SUBSCRIPTION_ID
-    private var carrierId: Int = TelephonyManager.UNKNOWN_CARRIER_ID
     private var subscriptionInfo: SubscriptionInfo? = null
     private lateinit var preference: Preference
 
@@ -41,9 +40,6 @@ class DeleteSimProfilePreferenceController(context: Context, preferenceKey: Stri
         this.subscriptionId = subscriptionId
         subscriptionInfo = SubscriptionUtil.getAvailableSubscriptions(mContext)
             .find { it.subscriptionId == subscriptionId && it.isEmbedded }
-        subscriptionInfo?.let {
-            carrierId = it.carrierId
-        }
     }
 
     override fun getAvailabilityStatus() = when (subscriptionInfo) {
@@ -71,8 +67,7 @@ class DeleteSimProfilePreferenceController(context: Context, preferenceKey: Stri
     }
 
     private fun deleteSim() {
-        SubscriptionUtil.startDeleteEuiccSubscriptionDialogActivity(mContext, subscriptionId,
-                carrierId)
+        SubscriptionUtil.startDeleteEuiccSubscriptionDialogActivity(mContext, subscriptionId)
         // result handled in MobileNetworkSettings
     }
 }

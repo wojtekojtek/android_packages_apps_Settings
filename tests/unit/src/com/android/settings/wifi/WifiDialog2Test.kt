@@ -23,7 +23,6 @@ import com.android.settings.R
 import com.android.settings.wifi.WifiDialog2.WifiDialog2Listener
 import com.android.wifitrackerlib.WifiEntry
 import com.google.common.truth.Truth.assertThat
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -31,7 +30,6 @@ import org.mockito.Mock
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 
-@Ignore
 @RunWith(AndroidJUnit4::class)
 class WifiDialog2Test {
     @get:Rule

@@ -77,8 +77,7 @@ fun SimOnboardingPrimarySimImpl(
             SettingsBody(stringResource(id = R.string.sim_onboarding_primary_sim_msg))
         }
 
-        var selectedSubscriptionInfoList =
-                onboardingService.getSelectedSubscriptionInfoListWithRenaming()
+        var selectedSubscriptionInfoList = onboardingService.getSelectedSubscriptionInfoList()
         callsSelectedId.intValue = onboardingService.targetPrimarySimCalls
         textsSelectedId.intValue = onboardingService.targetPrimarySimTexts
         mobileDataSelectedId.intValue = onboardingService.targetPrimarySimMobileData

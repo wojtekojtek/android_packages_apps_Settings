@@ -56,7 +56,6 @@ import com.android.settings.spa.notification.NotificationMainPageProvider
 import com.android.settings.spa.system.AppLanguagesPageProvider
 import com.android.settings.spa.system.LanguageAndInputPageProvider
 import com.android.settings.spa.system.SystemMainPageProvider
-import com.android.settings.wifi.details2.WifiPrivacyPageProvider
 import com.android.settingslib.spa.framework.common.SettingsPageProviderRepository
 import com.android.settingslib.spa.framework.common.SpaEnvironment
 import com.android.settingslib.spa.framework.common.SpaLogger
@@ -123,7 +122,6 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
         SimOnboardingPageProvider,
         BatteryOptimizationModeAppListPageProvider,
         NetworkCellularGroupProvider,
-        WifiPrivacyPageProvider,
     )
 
     override val logger = if (FeatureFlagUtils.isEnabled(

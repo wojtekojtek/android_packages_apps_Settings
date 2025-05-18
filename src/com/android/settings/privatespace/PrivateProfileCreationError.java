@@ -60,7 +60,9 @@ public class PrivateProfileCreationError extends InstrumentedFragment {
                         .setText(R.string.private_space_cancel_label)
                         .setListener(onCancel())
                         .setButtonType(FooterButton.ButtonType.CANCEL)
-                        .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
+                        .setTheme(
+                                androidx.appcompat.R.style
+                                        .Base_TextAppearance_AppCompat_Widget_Button)
                         .build());
         OnBackPressedCallback callback =
                 new OnBackPressedCallback(true /* enabled by default */) {

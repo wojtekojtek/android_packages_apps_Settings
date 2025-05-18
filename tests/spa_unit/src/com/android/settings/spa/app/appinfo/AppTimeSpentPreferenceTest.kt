@@ -17,16 +17,17 @@
 package com.android.settings.spa.app.appinfo
 
 import android.content.Context
+import android.content.pm.ActivityInfo
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import android.content.pm.PackageManager.ResolveInfoFlags
 import android.content.pm.ResolveInfo
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.assertIsNotEnabled
-import androidx.compose.ui.test.hasText
-import androidx.compose.ui.test.isEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
@@ -34,13 +35,12 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.testutils.FakeFeatureFactory
-import com.android.settingslib.spa.testutils.any
-import com.android.settingslib.spa.testutils.waitUntilExists
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito.any
 import org.mockito.Mockito.anyInt
 import org.mockito.Spy
 import org.mockito.junit.MockitoJUnit
@@ -59,26 +59,39 @@ class AppTimeSpentPreferenceTest {
     private val context: Context = ApplicationProvider.getApplicationContext()
 
     @Mock
-    private lateinit var mockPackageManager: PackageManager
+    private lateinit var packageManager: PackageManager
 
     private val fakeFeatureFactory = FakeFeatureFactory()
     private val appFeatureProvider = fakeFeatureFactory.mockApplicationFeatureProvider
 
     @Before
     fun setUp() {
-        whenever(context.packageManager).thenReturn(mockPackageManager)
+        whenever(context.packageManager).thenReturn(packageManager)
         whenever(appFeatureProvider.getTimeSpentInApp(PACKAGE_NAME)).thenReturn(TIME_SPENT)
     }
 
-    private fun mockActivityQueryResult(resolveInfo: ResolveInfo?) {
+    private fun mockActivitiesQueryResult(resolveInfos: List<ResolveInfo>) {
         whenever(
-            mockPackageManager.resolveActivityAsUser(any(), anyInt(), anyInt())
-        ).thenReturn(resolveInfo)
+            packageManager.queryIntentActivitiesAsUser(any(), any<ResolveInfoFlags>(), anyInt())
+        ).thenReturn(resolveInfos)
     }
 
     @Test
     fun noIntentHandler_notDisplay() {
-        mockActivityQueryResult(null)
+        mockActivitiesQueryResult(emptyList())
+
+        composeTestRule.setContent {
+            CompositionLocalProvider(LocalContext provides context) {
+                AppTimeSpentPreference(INSTALLED_APP)
+            }
+        }
+
+        composeTestRule.onRoot().assertIsNotDisplayed()
+    }
+
+    @Test
+    fun hasIntentHandler_notSystemApp_notDisplay() {
+        mockActivitiesQueryResult(listOf(ResolveInfo()))
 
         composeTestRule.setContent {
             CompositionLocalProvider(LocalContext provides context) {
@@ -91,7 +104,7 @@ class AppTimeSpentPreferenceTest {
 
     @Test
     fun installedApp_enabled() {
-        mockActivityQueryResult(ResolveInfo())
+        mockActivitiesQueryResult(listOf(MATCHED_RESOLVE_INFO))
 
         composeTestRule.setContent {
             CompositionLocalProvider(LocalContext provides context) {
@@ -99,16 +112,18 @@ class AppTimeSpentPreferenceTest {
             }
         }
 
-        composeTestRule.waitUntilExists(
-            hasText(context.getString(R.string.time_spent_in_app_pref_title)) and isEnabled()
-        )
+        composeTestRule.onNodeWithText(context.getString(R.string.time_spent_in_app_pref_title))
+            .assertIsDisplayed()
+            .assertIsEnabled()
         composeTestRule.onNodeWithText(TIME_SPENT).assertIsDisplayed()
     }
 
     @Test
     fun notInstalledApp_disabled() {
-        mockActivityQueryResult(ResolveInfo())
-        val notInstalledApp = ApplicationInfo().apply { packageName = PACKAGE_NAME }
+        mockActivitiesQueryResult(listOf(MATCHED_RESOLVE_INFO))
+        val notInstalledApp = ApplicationInfo().apply {
+            packageName = PACKAGE_NAME
+        }
 
         composeTestRule.setContent {
             CompositionLocalProvider(LocalContext provides context) {
@@ -116,19 +131,25 @@ class AppTimeSpentPreferenceTest {
             }
         }
 
-        composeTestRule
-            .onNodeWithText(context.getString(R.string.time_spent_in_app_pref_title))
+        composeTestRule.onNodeWithText(context.getString(R.string.time_spent_in_app_pref_title))
             .assertIsNotEnabled()
     }
 
     companion object {
-        private const val PACKAGE_NAME = "package.name"
+        private const val PACKAGE_NAME = "package name"
         private const val TIME_SPENT = "15 minutes"
 
-        private val INSTALLED_APP =
-            ApplicationInfo().apply {
-                packageName = PACKAGE_NAME
-                flags = ApplicationInfo.FLAG_INSTALLED
+        private val INSTALLED_APP = ApplicationInfo().apply {
+            packageName = PACKAGE_NAME
+            flags = ApplicationInfo.FLAG_INSTALLED
+        }
+
+        private val MATCHED_RESOLVE_INFO = ResolveInfo().apply {
+            activityInfo = ActivityInfo().apply {
+                applicationInfo = ApplicationInfo().apply {
+                    flags = ApplicationInfo.FLAG_SYSTEM
+                }
             }
+        }
     }
 }

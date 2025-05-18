@@ -32,7 +32,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Bundle;
@@ -652,7 +651,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new AdbPreferenceController(context, fragment));
         controllers.add(new ClearAdbKeysPreferenceController(context, fragment));
         controllers.add(new WirelessDebuggingPreferenceController(context, lifecycle));
-        controllers.add(new AdbRootPreferenceController(context, fragment));
         controllers.add(new AdbAuthorizationTimeoutPreferenceController(context));
         controllers.add(new LocalTerminalPreferenceController(context));
         controllers.add(new BugReportInPowerPreferenceController(context));
@@ -671,12 +669,10 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new LogdSizePreferenceController(context));
         controllers.add(new LogPersistPreferenceController(context, fragment, lifecycle));
         controllers.add(new CameraLaserSensorPreferenceController(context));
-        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI)) {
-            controllers.add(new WifiDisplayCertificationPreferenceController(context));
-            controllers.add(new WifiVerboseLoggingPreferenceController(context));
-            controllers.add(new WifiScanThrottlingPreferenceController(context));
-            controllers.add(new WifiNonPersistentMacRandomizationPreferenceController(context));
-        }
+        controllers.add(new WifiDisplayCertificationPreferenceController(context));
+        controllers.add(new WifiVerboseLoggingPreferenceController(context));
+        controllers.add(new WifiScanThrottlingPreferenceController(context));
+        controllers.add(new WifiNonPersistentMacRandomizationPreferenceController(context));
         controllers.add(new MobileDataAlwaysOnPreferenceController(context));
         controllers.add(new TetheringHardwareAccelPreferenceController(context));
         controllers.add(new BluetoothDeviceNoNamePreferenceController(context));
@@ -690,6 +686,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothA2dpHwOffloadPreferenceController(context, fragment));
         controllers.add(new BluetoothLeAudioHwOffloadPreferenceController(context, fragment));
         controllers.add(new BluetoothMaxConnectedAudioDevicesPreferenceController(context));
+        controllers.add(new NfcStackDebugLogPreferenceController(context));
         controllers.add(new NfcSnoopLogPreferenceController(context, fragment));
         controllers.add(new NfcVerboseVendorLogPreferenceController(context, fragment));
         controllers.add(new ShowTapsPreferenceController(context));

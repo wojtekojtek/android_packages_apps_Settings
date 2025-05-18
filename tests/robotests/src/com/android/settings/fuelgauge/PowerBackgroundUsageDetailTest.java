@@ -33,6 +33,7 @@ import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.AppOpsManager;
+import android.app.backup.BackupManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -118,6 +119,7 @@ public class PowerBackgroundUsageDetailTest {
     @Mock private LoaderManager mLoaderManager;
     @Mock private ApplicationsState.AppEntry mAppEntry;
     @Mock private BatteryEntry mBatteryEntry;
+    @Mock private BackupManager mBackupManager;
     @Mock private PackageManager mPackageManager;
     @Mock private AppOpsManager mAppOpsManager;
     @Mock private CompoundButton mMockSwitch;
@@ -172,6 +174,7 @@ public class PowerBackgroundUsageDetailTest {
         mFragment.mHeaderPreference = mHeaderPreference;
         mFragment.mState = mState;
         mFragment.mBatteryOptimizeUtils = mBatteryOptimizeUtils;
+        mFragment.mBackupManager = mBackupManager;
         mAppEntry.info = mock(ApplicationInfo.class);
 
         mTestActivity = spy(new SettingsActivity());

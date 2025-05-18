@@ -16,11 +16,9 @@
 
 package com.android.settings.inputmethod;
 
-import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.hardware.input.InputManager;
 import android.hardware.input.KeyboardLayout;
@@ -37,7 +35,6 @@ import androidx.fragment.app.Fragment;
 
 import com.android.hardware.input.Flags;
 import com.android.settings.R;
-import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 
 //TODO: b/316243168 - [Physical Keyboard Setting] Refactor NewKeyboardLayoutPickerFragment
 public class NewKeyboardLayoutPickerFragment extends Fragment {
@@ -84,7 +81,7 @@ public class NewKeyboardLayoutPickerFragment extends Fragment {
             Bundle savedInstanceState) {
         mInputManager = requireContext().getSystemService(InputManager.class);
         ViewGroup fragmentView = (ViewGroup) inflater.inflate(
-                getPickerLayout(getResources().getConfiguration()), container, false);
+                R.layout.keyboard_layout_picker, container, false);
         mKeyboardLayoutPreview = fragmentView.findViewById(R.id.keyboard_layout_preview);
         mKeyboardLayoutPreviewText = fragmentView.findViewById(R.id.keyboard_layout_preview_name);
         if (!Flags.keyboardLayoutPreviewFlag()) {
@@ -103,12 +100,6 @@ public class NewKeyboardLayoutPickerFragment extends Fragment {
                 .replace(R.id.keyboard_layouts, fragment)
                 .commit();
         return fragmentView;
-    }
-
-    private int getPickerLayout(Configuration configuration) {
-        return !ActivityEmbeddingUtils.isAlreadyEmbedded(this.getActivity())
-                && configuration.orientation == ORIENTATION_LANDSCAPE
-                ? R.layout.keyboard_layout_picker_one_pane_land : R.layout.keyboard_layout_picker;
     }
 
     private void updateViewMarginForPreviewFlagOff(ViewGroup fragmentView) {

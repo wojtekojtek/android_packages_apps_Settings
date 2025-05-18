@@ -61,7 +61,7 @@ public class FingerprintSettingsRequireScreenOnToAuthPreferenceController
                 getUserHandle());
         if (toReturn == -1) {
             toReturn = mContext.getResources().getBoolean(
-                    org.lineageos.platform.internal.R.bool.config_fingerprintWakeAndUnlock) ? 1 : 0;
+                    com.android.internal.R.bool.config_performantAuthDefault) ? 1 : 0;
             Settings.Secure.putIntForUser(mContext.getContentResolver(),
                     Settings.Secure.SFPS_PERFORMANT_AUTH_ENABLED, toReturn, getUserHandle());
         }
@@ -94,7 +94,8 @@ public class FingerprintSettingsRequireScreenOnToAuthPreferenceController
     @Override
     public int getAvailabilityStatus() {
         if (mFingerprintManager != null
-                && mFingerprintManager.isHardwareDetected()) {
+                && mFingerprintManager.isHardwareDetected()
+                && mFingerprintManager.isPowerbuttonFps()) {
             return mFingerprintManager.hasEnrolledTemplates(getUserId())
                     ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
         } else {

@@ -74,8 +74,7 @@ public class RingtonePreference extends Preference {
                 true);
         mShowSilent = a.getBoolean(com.android.internal.R.styleable.RingtonePreference_showSilent,
                 true);
-        setIntent(new Intent(RingtoneManager.ACTION_RINGTONE_PICKER)
-                .setPackage(context.getString(R.string.config_sound_picker_package_name)));
+        setIntent(new Intent(RingtoneManager.ACTION_RINGTONE_PICKER));
         setUserId(UserHandle.myUserId());
         a.recycle();
     }

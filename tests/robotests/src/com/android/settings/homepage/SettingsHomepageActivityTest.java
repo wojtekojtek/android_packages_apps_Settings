@@ -29,6 +29,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -38,7 +39,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.Settings;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -55,7 +55,6 @@ import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -82,26 +81,9 @@ public class SettingsHomepageActivityTest {
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
-    @Before
-    public void setup() {
-        Settings.Global.putInt(ApplicationProvider.getApplicationContext().getContentResolver(),
-                Settings.Global.DEVICE_PROVISIONED, 1);
-    }
-
     @After
     public void tearDown() {
         ShadowPasswordUtils.reset();
-    }
-
-    @Test
-    public void launch_deviceUnprovisioned_finish() {
-        Settings.Global.putInt(ApplicationProvider.getApplicationContext().getContentResolver(),
-                Settings.Global.DEVICE_PROVISIONED, 0);
-
-        SettingsHomepageActivity activity = Robolectric.buildActivity(
-                SettingsHomepageActivity.class).create().get();
-
-        assertThat(activity.isFinishing()).isTrue();
     }
 
     @Test
@@ -239,6 +221,28 @@ public class SettingsHomepageActivityTest {
         verify(window).setAttributes(paramCaptor.capture());
         assertThat(paramCaptor.getValue().privateFlags
                 & SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS).isEqualTo(0);
+    }
+
+    @Test
+    public void onCreate_notTaskRoot_shouldFinishActivity() {
+        SettingsHomepageActivity activity =
+                spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());
+        doReturn(false).when(activity).isTaskRoot();
+
+        activity.onCreate(/* savedInstanceState */ null);
+
+        verify(activity).finish();
+    }
+
+    @Test
+    public void onCreate_singleTaskActivity_shouldNotFinishActivity() {
+        SettingsHomepageActivity activity =
+                spy(Robolectric.buildActivity(DeepLinkHomepageActivity.class).get());
+        doReturn(false).when(activity).isTaskRoot();
+
+        activity.onCreate(/* savedInstanceState */ null);
+
+        verify(activity, never()).finish();
     }
 
     /** This test is for large screen devices Activity embedding. */
